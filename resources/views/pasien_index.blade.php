@@ -18,6 +18,11 @@
                                     <th>NO</th>
                                     <th>No Pasien</th>
                                     <th>Nama</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Usia</th>
+                                    <th>Foto</th>
+                                    <th>Alamat</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,8 +30,24 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->no_pasien }}</td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td>{{ $item->jenis_kelamin }}</td>
+                                        <td>{{ $item->umur }}</td>
+                                        <td><img src="{{ $item->foto ? asset('storage/images/' . $item->foto) : asset('storage/images/orang.png') }}"
+                                                alt="'foto pasien" width="70px" style="aspect-ratio: 1/1"></td>
+                                        <td>{{ $item->alamat }}</td>
                                         <td>
-                                            {{ $item->nama }}
+                                            <a href="/pasien/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-2">
+                                                Edit
+                                            </a>
+                                            <form action="/pasien/{{ $item->id }}" method="post" class="d-inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-sm ml-2"
+                                                    onclick="return confirm('Anda Yakin?')">
+                                                    Hapus
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

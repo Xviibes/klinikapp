@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Project Akmal') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -93,8 +93,13 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
-        </main>
+    @if (session()->has('pesan'))
+        <div class="alert alert-info" role="alert">
+            {{ session('pesan') }}
+        </div>
+    @endif
+    @yield('content')
+</main>
     </div>
 </body>
 </html>
